@@ -53,21 +53,25 @@ const NoteScreen = () => {
                             placeholderTextColor='#aaa'
                             value={newNote}
                             onChangeText={setNewNote} />
+
+
+
+                        <View style={styles.modalButtons}>
+                            <TouchableOpacity
+                                style={styles.cancelButton}
+                                onPress={() => setModalVisible(false)}>
+
+                                <Text style={styles.cancelButtonText}> Cancel</Text>
+                            </TouchableOpacity>
+
+
+                            <TouchableOpacity style={styles.saveButton} >
+                                <Text style={styles.saveButtonText}>Save</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
 
-                    <View style={styles.modalButtons}>
-                        <TouchableOpacity
-                            style={styles.cancelButton}
-                            onPress={() => setModalVisible(false)}>
 
-                            <Text style={styles.cancelButtonText}> Cancel</Text>
-                        </TouchableOpacity>
-
-
-                        <TouchableOpacity style={styles.saveButton} >
-                            <Text style={styles.saveButtonText}>Save</Text>
-                        </TouchableOpacity>
-                    </View>
                 </View>
 
             </Modal>
@@ -157,10 +161,12 @@ const styles = StyleSheet.create({
     cancelButton: {
         backgroundColor: '#ccc',
         padding: 10,
+        marginRight: 10,
         borderRadius: 5,
         flex: 1,
-        marginRight: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        textAlign: 'center',
+        justifyContent: 'center'
     },
 
     cancelButtonText: {
@@ -175,13 +181,15 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        textAlign: 'center',
+        justifyContent: 'center'
     },
 
-    saveButtonText{
-    fontSize: 16,
-    color: '#fff'
-}
+    saveButtonText: {
+        fontSize: 16,
+        color: '#fff'
+    }
 
 
 })
