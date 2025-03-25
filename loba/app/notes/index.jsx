@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Touchable, TouchableOpacity, Modal, TextInput } from 'react-native';
 
 
 
@@ -13,6 +13,9 @@ const NoteScreen = () => {
     ])
 
 
+    const [ModalVisible, setModalVisible] = useState(false);
+    const [newNote, setNewNote] = useState('');
+
 
     return (
         <View style={styles.container}>
@@ -21,12 +24,46 @@ const NoteScreen = () => {
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                     <View style={styles.noteItem}>
-                        <Text style={styles.noteItext}>
+                        <Text style={styles.noteText}>
                             {item.text}
                         </Text>
 
                     </View>
                 )} />
+
+
+            <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
+                <Text style={styles.addButtonText}> + Add Note</Text>
+            </TouchableOpacity>
+
+
+            {/* modal */}
+
+            <Modal
+                visible={ModalVisible}
+                animationType='slide'
+                transparent
+                onRequestClose={() => setModalVisible(false)}>
+
+                <View style={styles.modalOverlay}>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.modalTitle}> Add a new Note</Text>
+                        <TextInput style={styles.input}
+                            placeholder='Enter note...'
+                            placeholderTextColor='#aaa'
+                            value={newNote}
+                            onChangeText={setNewNote} />
+                    </View>
+
+                    <View style={styles.modalButtons}>
+                        <TouchableOpacity
+                            style={styles.cancelButton}
+                            onPress={() => setModalVisible(false)}>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+            </Modal>
         </View>
     )
 }
@@ -54,6 +91,24 @@ const styles = StyleSheet.create({
 
     noteText: {
         fontSize: 19
+    },
+
+    addButton: {
+        position: 'absolute',
+        bottom: 20,
+        left: 20,
+        right: 20,
+        backgroundColor: '#007bff',
+        padding: 15,
+        borderRadius: 8,
+        alignItems: 'center'
+    },
+
+    addButtonText: {
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: 'bold'
+
     }
 
 
