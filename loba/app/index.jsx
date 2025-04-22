@@ -2,6 +2,7 @@ import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import PostImage from '@/assets/images/images/post-it.png';
 import { useRouter } from "expo-router";
 
+3
 
 const HomeScreen = () => {
 

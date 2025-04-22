@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Touchable, TouchableOpacity, Modal, TextInput } from 'react-native';
-
+import NoteList from '../../components/NoteList';
 
 
 const NoteScreen = () => {
@@ -17,20 +17,32 @@ const NoteScreen = () => {
     const [newNote, setNewNote] = useState('');
 
 
+
+    // add newNote
+
+    const addNote = () => {
+
+        if (newNote.trim() === '') return;
+
+
+
+        setNotes((prevNotes) => [
+            ...prevNotes,
+            { id: Date.now.toString(), text: newNote }
+        ])
+
+
+        setNewNote('');
+
+        setModalVisible(false);
+
+    }
+
+
     return (
         <View style={styles.container}>
-            <FlatList
-                data={notes}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                    <View style={styles.noteItem}>
-                        <Text style={styles.noteText}>
-                            {item.text}
-                        </Text>
-
-                    </View>
-                )} />
-
+            {/* Note List */}
+            <NoteList notes={notes} />
 
             <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
                 <Text style={styles.addButtonText}> + Add Note</Text>
@@ -65,7 +77,7 @@ const NoteScreen = () => {
                             </TouchableOpacity>
 
 
-                            <TouchableOpacity style={styles.saveButton} >
+                            <TouchableOpacity style={styles.saveButton} onPress={addNote}>
                                 <Text style={styles.saveButtonText}>Save</Text>
                             </TouchableOpacity>
                         </View>
