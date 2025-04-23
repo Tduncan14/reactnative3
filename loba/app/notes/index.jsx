@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Touchable, TouchableOpacity, Modal, TextInput } from 'react-native';
 import NoteList from '../../components/NoteList';
+import addNoteModal from '../../components/AddNoteModal';
 
 
 const NoteScreen = () => {
@@ -51,42 +52,15 @@ const NoteScreen = () => {
 
             {/* modal */}
 
-            <Modal
-                visible={ModalVisible}
-                animationType='slide'
-                transparent
-                onRequestClose={() => setModalVisible(false)}>
-
-                <View style={styles.modalOverlay}>
-                    <View style={styles.modalContent}>
-                        <Text style={styles.modalTitle}> Add a new Note</Text>
-                        <TextInput style={styles.input}
-                            placeholder='Enter note...'
-                            placeholderTextColor='#aaa'
-                            value={newNote}
-                            onChangeText={setNewNote} />
+            <addNoteModal
+                ModalVisible={ModalVisible}
+                setModalVisible={setModalVisible}
+                newNote={newNote}
+                setNewNote={setNewNote}
+                addNote={addNote}
+            />
 
 
-
-                        <View style={styles.modalButtons}>
-                            <TouchableOpacity
-                                style={styles.cancelButton}
-                                onPress={() => setModalVisible(false)}>
-
-                                <Text style={styles.cancelButtonText}> Cancel</Text>
-                            </TouchableOpacity>
-
-
-                            <TouchableOpacity style={styles.saveButton} onPress={addNote}>
-                                <Text style={styles.saveButtonText}>Save</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-
-                </View>
-
-            </Modal>
         </View>
     )
 }
